@@ -1,0 +1,31 @@
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+ 
+/**
+ * @author YoungXinLer
+ * date 2018/8/4 17:09
+ */
+ 
+public class ChangeTime{
+    public static void main(String[] args) throws Exception{
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("请输入要修改文件的绝对路径： 例如：C:\\\\Users\\\\Youngxinler\\\\Desktop\\\\下午.doc");
+        String fileAddress = scanner.nextLine();
+        File targetFile = new File(fileAddress);//文件的绝对路径
+ 
+        Date fileLastTime = new Date(targetFile.lastModified());
+        System.out.println("文件的上次修改时间为："+fileLastTime.toString());
+        System.out.println("请输入要修改的时间： 例如2015-07-05 12:53:42 回车结束");
+        String targetTime = scanner.nextLine();
+ 
+        long targetTimeLongType = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(targetTime).getTime();//将String类型的时间转化为long类型
+ 
+        if (targetFile.setLastModified(targetTimeLongType)){ //判断是否成功
+            System.out.println("修改成功， 现在的上次修改时间为：" + new Date(targetFile.lastModified()).toString());
+        }else{
+            System.out.println("修改失败！");
+        }
+    }
+}

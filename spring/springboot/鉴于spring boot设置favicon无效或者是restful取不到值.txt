@@ -1,0 +1,16 @@
+在yml 文件中设置
+spring:
+   mvc:
+    favicon:
+      enabled: false
+禁用自带的favicon.ico
+然后把自己的favicon.ico名字要相同
+放在public    或者是META-INF/resources、resources、staic文件夹下
+随便一个即可
+
+注意：Controller层的@RequestMapping("/{}")  这样不能出现
+
+如果要使用restful风格
+@RequestMapping("/abc/{qwe}")
+public void mehod(@PathVaiable("qwe")){}
+ 必须如上所写，这样就不会出错

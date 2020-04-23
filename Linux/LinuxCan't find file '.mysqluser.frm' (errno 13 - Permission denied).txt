@@ -1,0 +1,15 @@
+[ROOT mysql]$ mysqld --basedir=/usr --datadir=/var/lib/mysql --user=mysql --pid-file=/var/run/mysqld
+
+进入到 上面的  datadir地址
+
+
+设置权限
+ROOT mysql]$ chown mysql *
+
+[ROOT mysql]$ chgrp mysql *
+
+[ROOT mysql]$ chmod ug+rwx *
+
+ 
+
+再重启mysql即可

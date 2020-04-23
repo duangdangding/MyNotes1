@@ -1,0 +1,44 @@
+Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)
+
+启动mysql 报错：
+ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock’ (2)
+1、先查看 /etc/rc.d/init.d/mysqld status 看看m y s q l 是否已经启动.
+另外看看是不是权限问题.
+2、确定你的mysql.sock是不是在那个位置，
+mysql -u 你的mysql用户名 -p -S /var/lib/mysql/mysql.sock
+3、试试：service mysqld start
+4、如果是权限问题，则先改变权限 #chown -R mysql:mysql /var/lib/mysql
+[root@localhost ~]# /etc/init.d/mysqld start
+启动 MySQL： [ 确定 ]
+[root@localhost ~]# mysql -uroot -p
+ 
+ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)
+   原因是，/var/lib/mysql 的访问权限问题。
+
+shell> chown -R mysql:mysql /var/lib/mysql
+
+接着启动服务器
+
+shell> /etc/init.d/mysql start
+
+服务器正常启动后察看 /var/lib/mysql 自动生成mysql.sock文件。
+
+但是我的问题仍然没有得到解决。
+
+问题终于解决：
+方法：    修改/etc/my.conf:
+[mysqld] 
+datadir=/usr/local/mysql/data 
+socket=/var/lib/mysql/mysql.sock 
+
+[mysql.server] 
+user=mysql 
+basedir=/usr/local/mysql 
+If there is not currently a section called [client], add one at the bottom of the file and copy the socket= line under the [mysqld] section such as: 
+[client] 
+socket=/var/lib/mysql/mysql.sock
+
+发现依旧如此，运行/etc/init.d/mysql start报错：    Starting MySQLCouldn't find MySQL manager or server 
+是mysqld服务没启，运行/usr/local/mysql/bin/mysqld_safe &
+
+问题解决。

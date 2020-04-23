@@ -1,0 +1,61 @@
+jar -cvf rt.jar rt asd
+多个文件目录打成jar
+
+
+"./MySQLServer56simple/bin/mysqld.exe" --defaults-file=./MySQLServer56simple/my.ini
+启动mysql
+
+set PATH=F:\simplification\jre1.8.0_144\bin;
+设置环境变量
+
+javaw -jar sbtemf.jar --server.port=8080
+springboot  启动jar 设置端口号
+
+pause
+任意键结束
+
+java -jar -verbose sbtemf.jar >> asd.txt
+某一个jar包所需要的包的信息到某个文件
+
+
+taskkill /im mysqld.exe /f
+结束指定程序进程
+
+
+
+%1 mshta vbscript:CreateObject("WScript.Shell").Run("%~s0 ::",0,FALSE)(window.close)&&exit
+"./MySQLServer56simple/bin/mysqld.exe" --defaults-file=./MySQLServer56simple/my.ini
+set PATH=F:\simplification\jre1.8.0_144\bin;
+java -jar sbtemf.jar --server.port=8080
+这是不出现黑窗口启动jar
+
+tasklist /nh|find /i "java.exe"
+if ERRORLEVEL 1 (echo qqa.exe不存在) else (echo qqa.exe存在)
+pause
+判断进程是否存在
+
+@echo off
+echo 当前盘符：%~d0
+echo 当前盘符和路径：%~dp0
+echo 当前盘符和路径的短文件名格式：%~sdp0
+echo 当前批处理全路径：%~f0
+echo 当前CMD默认目录：%cd%
+pause
+
+
+@echo off
+set var="C:/TEST/1"
+set var=%var%:/=//
+echo %var%
+pause
+字符串转换
+
+
+catalina.bat文件里可以设置标题，添加set TITLE=Tomcat_Test
+setclasspath.bat里可以修改进程名称，添加:
+copy "%JAVA_HOME%\bin\java.exe" "%JAVA_HOME%\bin\java_t.exe"
+修改：set _RUNJAVA="%JAVA_HOME%\bin\java_t"
+
+
+设置编码为utf8  一次性
+chcp 65001

@@ -1,0 +1,16 @@
+vi /etc/sysconfig/iptables
+
+
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 8080
+
+
+
+
+2、使用netstat 命令查看占用情况
+netstat -ap |grep 8080 //查找8080端口是否被占用
+netstat -tln   //表示以数字形式查看正在监听的端口
+netstat -ap   //查看所有应用占用端口情况

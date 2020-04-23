@@ -1,0 +1,62 @@
+有时我们会忘记Mysql的密码，或者想改一个密码，以下将对这两种情况修改密码的三种解决方法做个总结
+本文都以用户为 root 为例；
+
+一、拥有原来的myql的root的密码；
+方法一： 
+在mysql系统外，使用mysqladmin
+
+mysqladmin -u root -p password "test123"
+Enter password: 【输入原来的密码】
+1
+2
+方法二： 
+通过登录mysql系统，
+
+mysql -uroot -p
+Enter password: 【输入原来的密码】
+mysql>use mysql;
+mysql> update user set password=passworD("test") where user='root';
+mysql> exit;    
+1
+2
+3
+4
+5
+注意：如果Mysql的版本是5.7及以上的话update语句如下：
+
+mysql> update user set authentication_string=passworD("test") where user='root';
+1
+二、忘记原来的myql的root的密码；
+方法三：
+
+首先拿到操作系统的root权限，然后kill掉Mysql服务或者手动stop掉，这里我推荐使用手动stop；
+
+#service mysql stop
+1
+然后执行
+
+# mysqld_safe --skip-grant-tables &
+1
+&，表示在后台运行，不再后台运行的话，就再打开一个终端吧。 
+接着登陆MySQL修改密码
+接下来，在Linux中输入如下命令：
+
+# mysql -uroot -p
+
+mysql> use mysql; 
+mysql> update user set password=password('123') where user='root'; 
+mysql> flush privileges; 
+
+退出mysql
+
+删除skip-grant-tables
+
+重启mysql，完成。
+2
+3
+4
+注意：如果Mysql的版本是5.7及以上的话update语句如下：
+
+mysql> update user set authentication_string=passworD("test") where user='root';
+
+

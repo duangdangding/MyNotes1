@@ -1,0 +1,5 @@
+<dubbo:reference id="itemService" interface="com.mall.service.IItemService" timeout="120000" />
+
+<dubbo:service interface="com.mall.service.IItemService" ref="itemService" timeout="120000" protocol="dubbo" />
+
+∂ºº”…œtimeout
